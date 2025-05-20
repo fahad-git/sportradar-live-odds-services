@@ -1,10 +1,12 @@
 package com.sportradar.library.scoreboard;
 
-import com.sportradar.library.exceptions.ScoreBoardException;
+import com.sportradar.library.exceptions.DuplicateMatchException;
+import com.sportradar.library.exceptions.MatchNotFoundException;
 import com.sportradar.library.exceptions.TeamNameException;
 import com.sportradar.library.match.Match;
 import com.sportradar.library.match.MatchImpl;
 import com.sportradar.library.team.Team;
+import lombok.Synchronized;
 
 import java.util.*;
 
@@ -12,6 +14,7 @@ public class ScoreBoardImpl implements Scoreboard {
 
     private final List<Match> matches = new ArrayList<>();
 
+    @Synchronized
     @Override
     public void startMatch(String homeTeamName, String awayTeamName) {
 
@@ -19,25 +22,31 @@ public class ScoreBoardImpl implements Scoreboard {
 
         // Check if this match already exists
         if(findMatch(homeTeamName, awayTeamName).isPresent()) {
-            throw new ScoreBoardException(
+            throw new DuplicateMatchException(
                     "It is not possible to have two same matches at the same time."
             );
         }
 
         // Create new match and add it to active list
-        MatchImpl Match = new MatchImpl(new Team(homeTeamName), new Team(awayTeamName));
-        matches.add(Match);
+        MatchImpl match = new MatchImpl(new Team(homeTeamName), new Team(awayTeamName));
+        matches.add(match);
     }
 
+    @Synchronized
     @Override
     public void finishMatch(String homeTeamName, String awayTeamName) {
         // Remove match by team names
-        matches.removeIf(match ->
+        boolean removed = matches.removeIf(match ->
                 match.getHomeTeam().getName().equalsIgnoreCase(homeTeamName) &&
                         match.getAwayTeam().getName().equalsIgnoreCase(awayTeamName)
         );
+
+        if (!removed) {
+            throw new MatchNotFoundException("Cannot finish match that doesn't exist.");
+        }
     }
 
+    @Synchronized
     @Override
     public void updateScore(String homeTeamName, String awayTeamName, int homeTeamScore, int awayTeamScore) {
 
@@ -47,7 +56,7 @@ public class ScoreBoardImpl implements Scoreboard {
 
         // If match not found, throw exception
         if (optionalMatch.isEmpty()) {
-            throw new ScoreBoardException("It is not possible to update match which is not active.");
+            throw new MatchNotFoundException("It is not possible to update match which is not active.");
         }
 
         // Update score if found
@@ -55,6 +64,7 @@ public class ScoreBoardImpl implements Scoreboard {
         foundMatch.updateScore(homeTeamScore, awayTeamScore);
     }
 
+    @Synchronized
     @Override
     public List<Match> getOrderedMatches() {
         // Return unmodifiable sorted list:

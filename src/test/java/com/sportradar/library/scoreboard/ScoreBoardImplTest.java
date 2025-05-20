@@ -1,12 +1,11 @@
 package com.sportradar.library.scoreboard;
 
-import com.sportradar.library.exceptions.ScoreBoardException;
+import com.sportradar.library.exceptions.DuplicateMatchException;
+import com.sportradar.library.exceptions.MatchNotFoundException;
 import com.sportradar.library.exceptions.TeamNameException;
 import com.sportradar.library.match.Match;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.sun.jdi.request.DuplicateRequestException;
 
 import java.util.List;
 
@@ -32,18 +31,31 @@ class ScoreBoardImplTest {
     }
 
     @Test
-    void shouldThrowExceptionForDuplicateMatch() {
+    void shouldThrowForDuplicateMatch() {
         scoreboard.startMatch("TeamA", "TeamB");
-        assertThrows(ScoreBoardException.class, () ->
+        DuplicateMatchException ex = assertThrows(DuplicateMatchException.class, () ->
                 scoreboard.startMatch("TeamA", "TeamB"));
+        assertEquals("It is not possible to have two same matches at the same time.", ex.getMessage());
     }
 
     @Test
-    void shouldThrowExceptionForBlankOrSameTeamNames() {
+    void shouldThrowForBlankOrSameTeamNames() {
         assertAll("Invalid team names",
-                () -> assertThrows(TeamNameException.class, () -> scoreboard.startMatch("  ", "TeamB")),
-                () -> assertThrows(TeamNameException.class, () -> scoreboard.startMatch("TeamA", null)),
-                () -> assertThrows(TeamNameException.class, () -> scoreboard.startMatch("TeamA", "TeamA"))
+                () -> {
+                    TeamNameException ex = assertThrows(TeamNameException.class, () ->
+                            scoreboard.startMatch("  ", "TeamB"));
+                    assertEquals("Team name cannot be empty.", ex.getMessage());
+                },
+                () -> {
+                    TeamNameException ex = assertThrows(TeamNameException.class, () ->
+                            scoreboard.startMatch("TeamA", null));
+                    assertEquals("Team name cannot be empty.", ex.getMessage());
+                },
+                () -> {
+                    TeamNameException ex = assertThrows(TeamNameException.class, () ->
+                            scoreboard.startMatch("TeamA", "TeamA"));
+                    assertEquals("Teams cannot have the same name.", ex.getMessage());
+                }
         );
     }
 
@@ -54,6 +66,13 @@ class ScoreBoardImplTest {
 
         List<Match> matches = scoreboard.getOrderedMatches();
         assertTrue(matches.isEmpty());
+    }
+
+    @Test
+    void shouldThrowWhenFinishingNonExistingMatch() {
+        MatchNotFoundException ex = assertThrows(MatchNotFoundException.class, () ->
+                scoreboard.finishMatch("UnknownA", "UnknownB"));
+        assertEquals("Cannot finish match that doesn't exist.", ex.getMessage());
     }
 
     @Test
@@ -68,22 +87,24 @@ class ScoreBoardImplTest {
     }
 
     @Test
-    void shouldThrowExceptionForNegativeScores() {
+    void shouldThrowForNegativeScores() {
         scoreboard.startMatch("TeamA", "TeamB");
-        assertThrows(IllegalArgumentException.class, () ->
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
                 scoreboard.updateScore("TeamA", "TeamB", -1, 2));
+        assertEquals("It is not possible to update match with negative values.", ex.getMessage());
     }
 
     @Test
-    void shouldThrowExceptionWhenUpdatingNonExistingMatch() {
-        assertThrows(ScoreBoardException.class, () ->
+    void shouldThrowWhenUpdatingNonExistingMatch() {
+        MatchNotFoundException ex = assertThrows(MatchNotFoundException.class, () ->
                 scoreboard.updateScore("TeamX", "TeamY", 1, 1));
+        assertEquals("It is not possible to update match which is not active.", ex.getMessage());
     }
 
     @Test
     void shouldReturnMatchesOrderedByTotalScoreAndStartTime() throws InterruptedException {
         scoreboard.startMatch("Mexico", "Canada");      // 0
-        Thread.sleep(10); // Ensuring different start times
+        Thread.sleep(10);
         scoreboard.startMatch("Spain", "Brazil");       // 0
         Thread.sleep(10);
         scoreboard.startMatch("Germany", "France");     // 0
@@ -100,10 +121,10 @@ class ScoreBoardImplTest {
 
         List<Match> ordered = scoreboard.getOrderedMatches();
 
-        assertEquals("Uruguay", ordered.get(0).getHomeTeam().getName()); // 12, newer
-        assertEquals("Spain", ordered.get(1).getHomeTeam().getName());   // 12, older
-        assertEquals("Mexico", ordered.get(2).getHomeTeam().getName());  // 5
+        assertEquals("Uruguay", ordered.get(0).getHomeTeam().getName());   // 12, newer
+        assertEquals("Spain", ordered.get(1).getHomeTeam().getName());     // 12, older
+        assertEquals("Mexico", ordered.get(2).getHomeTeam().getName());    // 5
         assertEquals("Argentina", ordered.get(3).getHomeTeam().getName()); // 4, newer
-        assertEquals("Germany", ordered.get(4).getHomeTeam().getName()); // 4, older
+        assertEquals("Germany", ordered.get(4).getHomeTeam().getName());   // 4, older
     }
 }

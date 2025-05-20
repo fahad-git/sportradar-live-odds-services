@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="Added Team and Match class implementation as data classes.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/exceptions/ScoreBoardException.java" afterDir="false" />
+    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/exceptions/DuplicateMatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/exceptions/InvalidMatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/exceptions/MatchNotFoundException.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/exceptions/TeamNameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/Scoreboard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +47,7 @@
     "JUnit.MatchImplTest.executor": "Coverage",
     "JUnit.ScoreBoardImplTest.executor": "Run",
     "JUnit.ScoreBoardImplTest.shouldThrowExceptionForDuplicateMatch.executor": "Debug",
-    "JUnit.TeamTest.executor": "Coverage",
+    "JUnit.TeamTest.executor": "Run",
     "JUnit.TeamTest.testConstructor.executor": "Run",
     "JUnit.team in tmp.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
@@ -150,8 +148,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ScoreBoardImplTest" />
-        <item itemvalue="JUnit.TeamTest" />
         <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.TeamTest" />
         <item itemvalue="JUnit.ScoreBoardImplTest.shouldThrowExceptionForDuplicateMatch" />
         <item itemvalue="JUnit.MatchImplTest" />
       </list>
@@ -176,7 +174,7 @@
       <workItem from="1747764957988" duration="17000" />
       <workItem from="1747765055675" duration="1914000" />
       <workItem from="1747767142168" duration="17000" />
-      <workItem from="1747767247496" duration="6688000" />
+      <workItem from="1747767247496" duration="8482000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized java maven project for sportradar coding challenge.">
       <option name="closed" value="true" />
@@ -202,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747774791969</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly.">
+      <option name="closed" value="true" />
+      <created>1747776112068</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747776112068</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +221,8 @@
     <MESSAGE value="Initialized java maven project for sportradar coding challenge." />
     <MESSAGE value="Added failing unit test cases for class Team and MatchImpl." />
     <MESSAGE value="Added Team and Match class implementation as data classes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Team and Match class implementation as data classes." />
+    <MESSAGE value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sportradar_live_odds_services$MatchImplTest.ic" NAME="MatchImplTest Coverage Results" MODIFIED="1747768717025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
