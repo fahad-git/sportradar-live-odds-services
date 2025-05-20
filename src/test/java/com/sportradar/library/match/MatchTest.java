@@ -10,14 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MatchImplTest {
 
-    private Team homeTeam;
-    private Team awayTeam;
     private MatchImpl match;
 
     @BeforeEach
     void setUp() {
-        homeTeam = new Team("TeamA");
-        awayTeam = new Team("TeamB");
+        Team homeTeam = new Team("TeamA");
+        Team awayTeam = new Team("TeamB");
         match = new MatchImpl(homeTeam, awayTeam);
     }
 
