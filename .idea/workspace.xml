@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" afterDir="false" />
-    </list>
+    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="refactor: updated workspace." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -179,7 +177,7 @@
       <workItem from="1747765055675" duration="1914000" />
       <workItem from="1747767142168" duration="17000" />
       <workItem from="1747767247496" duration="8482000" />
-      <workItem from="1747862501873" duration="6284000" />
+      <workItem from="1747862501873" duration="6635000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized java maven project for sportradar coding challenge.">
       <option name="closed" value="true" />
@@ -229,7 +227,31 @@
       <option name="project" value="LOCAL" />
       <updated>1747870854948</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="refactor: removed unused import from App.">
+      <option name="closed" value="true" />
+      <created>1747870924999</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747870924999</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor: removed unused import from App.">
+      <option name="closed" value="true" />
+      <created>1747870928664</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747870928664</updated>
+    </task>
+    <task id="LOCAL-00009" summary="refactor: updated workspace.">
+      <option name="closed" value="true" />
+      <created>1747871185255</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747871185255</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +267,9 @@
     <MESSAGE value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
     <MESSAGE value="refactor: removed unused test file and upgraded junit jupiter version." />
     <MESSAGE value="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage" />
+    <MESSAGE value="refactor: removed unused import from App." />
+    <MESSAGE value="refactor: updated workspace." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: updated workspace." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sportradar_live_odds_services$MatchImplTest.ic" NAME="MatchImplTest Coverage Results" MODIFIED="1747768717025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
