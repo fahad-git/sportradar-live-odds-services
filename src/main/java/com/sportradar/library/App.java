@@ -1,15 +1,11 @@
 package com.sportradar.library;
 
-import com.sportradar.library.match.Match;
 import com.sportradar.library.match.MatchSummary;
 import com.sportradar.library.scoreboard.ScoreBoardImpl;
 import com.sportradar.library.scoreboard.Scoreboard;
 
 import java.util.List;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
 
