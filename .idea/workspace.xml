@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="refactor: removed unused test file and upgraded junit jupiter version.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/Scoreboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +179,7 @@
       <workItem from="1747765055675" duration="1914000" />
       <workItem from="1747767142168" duration="17000" />
       <workItem from="1747767247496" duration="8482000" />
-      <workItem from="1747862501873" duration="6186000" />
+      <workItem from="1747862501873" duration="6284000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized java maven project for sportradar coding challenge.">
       <option name="closed" value="true" />
@@ -229,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747779831155</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage">
+      <option name="closed" value="true" />
+      <created>1747870854948</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747870854948</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +244,8 @@
     <MESSAGE value="Added Team and Match class implementation as data classes." />
     <MESSAGE value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
     <MESSAGE value="refactor: removed unused test file and upgraded junit jupiter version." />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: removed unused test file and upgraded junit jupiter version." />
+    <MESSAGE value="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add MatchSummary and refactor scoreboard implementation&#10;&#10;- Added `MatchSummary` record to represent read-only match summaries&#10;- Refactored `ScoreBoardImpl`:&#10;  - Replaced `getTotalScore` from `MatchImpl` with local method&#10;  - Modified `getOrderedMatches()` to return list of `MatchSummary`&#10;- Updated all relevant unit tests to reflect `MatchSummary` usage" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sportradar_live_odds_services$MatchImplTest.ic" NAME="MatchImplTest Coverage Results" MODIFIED="1747768717025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
