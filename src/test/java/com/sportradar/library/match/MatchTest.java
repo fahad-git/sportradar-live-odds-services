@@ -11,11 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class MatchImplTest {
 
     private MatchImpl match;
+    private Team homeTeam;
+    private Team awayTeam;
 
     @BeforeEach
     void setUp() {
-        Team homeTeam = new Team("TeamA");
-        Team awayTeam = new Team("TeamB");
+        homeTeam = new Team("TeamA");
+        awayTeam = new Team("TeamB");
         match = new MatchImpl(homeTeam, awayTeam);
     }
 
@@ -47,18 +49,12 @@ class MatchImplTest {
     }
 
     @Test
-    void totalScoreShouldBeZeroInitially() {
-        assertEquals(0, match.getTotalScore());
-    }
-
-    @Test
     void shouldUpdateScoresCorrectly() {
         match.updateScore(2, 3);
 
         assertAll("Score Update",
                 () -> assertEquals(2, match.getHomeTeam().getScore()),
-                () -> assertEquals(3, match.getAwayTeam().getScore()),
-                () -> assertEquals(5, match.getTotalScore())
+                () -> assertEquals(3, match.getAwayTeam().getScore())
         );
     }
 
@@ -68,8 +64,14 @@ class MatchImplTest {
 
         assertAll("Negative Score Handling",
                 () -> assertEquals(-1, match.getHomeTeam().getScore()),
-                () -> assertEquals(-2, match.getAwayTeam().getScore()),
-                () -> assertEquals(-3, match.getTotalScore())
+                () -> assertEquals(-2, match.getAwayTeam().getScore())
         );
+    }
+
+    @Test
+    void teamsAreImmutableReferences() {
+        // Trying to reassign final fields is a compile error, so we test that getters return the same instance
+        assertSame(homeTeam, match.getHomeTeam());
+        assertSame(awayTeam, match.getAwayTeam());
     }
 }

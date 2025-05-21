@@ -1,6 +1,7 @@
 package com.sportradar.library;
 
 import com.sportradar.library.match.Match;
+import com.sportradar.library.match.MatchSummary;
 import com.sportradar.library.scoreboard.ScoreBoardImpl;
 import com.sportradar.library.scoreboard.Scoreboard;
 
@@ -8,12 +9,9 @@ import java.util.List;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
 
         Scoreboard scoreBoard = new ScoreBoardImpl();
 
@@ -35,13 +33,20 @@ public class App
         scoreBoard.startMatch("Germany", "Italy");
         scoreBoard.finishMatch("Germany", "Italy");
 
-        List<Match> matchesInProgress = scoreBoard.getOrderedMatches();
+        List<MatchSummary> matchesSummary = scoreBoard.getOrderedMatches();
 
         System.out.println("\nMatches in progress:");
-        for (Match match : matchesInProgress) {
-            String summary = String.format("%s %2d - %s %2d", match.getHomeTeam().getName(), match.getHomeTeam().getScore(), match.getAwayTeam().getName(), match.getAwayTeam().getScore());
-            System.out.println(summary);
+        for (MatchSummary summary : matchesSummary) {
+            String line = String.format(
+                    "%s %2d - %s %2d",
+                    summary.homeTeamName(),
+                    summary.homeTeamScore(),
+                    summary.awayTeamName(),
+                    summary.awayTeamScore()
+            );
+            System.out.println(line);
         }
+
 
     }
 }

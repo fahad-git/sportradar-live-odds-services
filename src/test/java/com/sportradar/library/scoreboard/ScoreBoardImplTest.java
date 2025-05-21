@@ -3,7 +3,7 @@ package com.sportradar.library.scoreboard;
 import com.sportradar.library.exceptions.DuplicateMatchException;
 import com.sportradar.library.exceptions.MatchNotFoundException;
 import com.sportradar.library.exceptions.TeamNameException;
-import com.sportradar.library.match.Match;
+import com.sportradar.library.match.MatchSummary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,14 +20,18 @@ class ScoreBoardImplTest {
         scoreboard = new ScoreBoardImpl();
     }
 
+    private int getTotalScore(MatchSummary summary) {
+        return summary.homeTeamScore() + summary.awayTeamScore();
+    }
+
     @Test
     void shouldStartMatchSuccessfully() {
         scoreboard.startMatch("TeamA", "TeamB");
-        List<Match> matches = scoreboard.getOrderedMatches();
+        List<MatchSummary> matches = scoreboard.getOrderedMatches();
 
         assertEquals(1, matches.size());
-        assertEquals("TeamA", matches.get(0).getHomeTeam().getName());
-        assertEquals("TeamB", matches.get(0).getAwayTeam().getName());
+        assertEquals("TeamA", matches.get(0).homeTeamName());
+        assertEquals("TeamB", matches.get(0).awayTeamName());
     }
 
     @Test
@@ -64,7 +68,7 @@ class ScoreBoardImplTest {
         scoreboard.startMatch("TeamA", "TeamB");
         scoreboard.finishMatch("TeamA", "TeamB");
 
-        List<Match> matches = scoreboard.getOrderedMatches();
+        List<MatchSummary> matches = scoreboard.getOrderedMatches();
         assertTrue(matches.isEmpty());
     }
 
@@ -80,10 +84,10 @@ class ScoreBoardImplTest {
         scoreboard.startMatch("TeamA", "TeamB");
         scoreboard.updateScore("TeamA", "TeamB", 2, 3);
 
-        Match match = scoreboard.getOrderedMatches().get(0);
-        assertEquals(2, match.getHomeTeam().getScore());
-        assertEquals(3, match.getAwayTeam().getScore());
-        assertEquals(5, match.getTotalScore());
+        MatchSummary match = scoreboard.getOrderedMatches().get(0);
+        assertEquals(2, match.homeTeamScore());
+        assertEquals(3, match.awayTeamScore());
+        assertEquals(5, getTotalScore(match));
     }
 
     @Test
@@ -119,12 +123,19 @@ class ScoreBoardImplTest {
         scoreboard.updateScore("Uruguay", "Italy", 6, 6);       // 12
         scoreboard.updateScore("Argentina", "Australia", 3, 1); // 4
 
-        List<Match> ordered = scoreboard.getOrderedMatches();
+        List<MatchSummary> ordered = scoreboard.getOrderedMatches();
 
-        assertEquals("Uruguay", ordered.get(0).getHomeTeam().getName());   // 12, newer
-        assertEquals("Spain", ordered.get(1).getHomeTeam().getName());     // 12, older
-        assertEquals("Mexico", ordered.get(2).getHomeTeam().getName());    // 5
-        assertEquals("Argentina", ordered.get(3).getHomeTeam().getName()); // 4, newer
-        assertEquals("Germany", ordered.get(4).getHomeTeam().getName());   // 4, older
+        assertEquals("Uruguay", ordered.get(0).homeTeamName());   // 12, newer
+        assertEquals("Spain", ordered.get(1).homeTeamName());     // 12, older
+        assertEquals("Mexico", ordered.get(2).homeTeamName());    // 5
+        assertEquals("Argentina", ordered.get(3).homeTeamName()); // 4, newer
+        assertEquals("Germany", ordered.get(4).homeTeamName());   // 4, older
+
+        // Optional score checks
+        assertEquals(12, getTotalScore(ordered.get(0)));
+        assertEquals(12, getTotalScore(ordered.get(1)));
+        assertEquals(5, getTotalScore(ordered.get(2)));
+        assertEquals(4, getTotalScore(ordered.get(3)));
+        assertEquals(4, getTotalScore(ordered.get(4)));
     }
 }

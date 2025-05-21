@@ -1,6 +1,6 @@
 package com.sportradar.library.scoreboard;
 
-import com.sportradar.library.match.Match;
+import com.sportradar.library.match.MatchSummary;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface Scoreboard {
 
     void updateScore(String homeTeamName, String awayTeamName, int homeTeamScore, int awayTeamScore);
 
-    List<Match> getOrderedMatches();
+    List<MatchSummary> getOrderedMatches();
 }

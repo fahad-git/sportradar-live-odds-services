@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly.">
+    <list default="true" id="7f47fd6f-7f4f-45c6-80ee-6fc17aefddcc" name="Changes" comment="refactor: removed unused test file and upgraded junit jupiter version.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchSummary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/match/MatchImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/ScoreBoardImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sportradar/library/scoreboard/Scoreboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/match/MatchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sportradar/library/scoreboard/ScoreBoardImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +53,8 @@
     "JUnit.TeamTest.testConstructor.executor": "Run",
     "JUnit.team in tmp.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.sportradar-live-odds-services [fmt:format].executor": "Run",
+    "Maven.sportradar-live-odds-services [mvn...].executor": "Run",
     "Maven.sportradar-live-odds-services [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -67,7 +75,14 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/sportradar/library" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MatchImplTest">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="nvm fmt:format" />
+      <command value="mvn mvn fmt:check" />
+      <command value="mvn fmt:format" />
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.TeamTest">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sportradar.library.App" />
       <module name="tmp" />
@@ -144,10 +159,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MatchImplTest" />
-        <item itemvalue="JUnit.ScoreBoardImplTest" />
-        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.TeamTest" />
+        <item itemvalue="JUnit.ScoreBoardImplTest" />
+        <item itemvalue="JUnit.MatchImplTest" />
+        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.ScoreBoardImplTest.shouldThrowExceptionForDuplicateMatch" />
       </list>
     </recent_temporary>
@@ -172,6 +187,7 @@
       <workItem from="1747765055675" duration="1914000" />
       <workItem from="1747767142168" duration="17000" />
       <workItem from="1747767247496" duration="8482000" />
+      <workItem from="1747862501873" duration="6186000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized java maven project for sportradar coding challenge.">
       <option name="closed" value="true" />
@@ -205,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747776112068</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactor: removed unused test file and upgraded junit jupiter version.">
+      <option name="closed" value="true" />
+      <created>1747779831155</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747779831155</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,13 +243,14 @@
     <MESSAGE value="Added failing unit test cases for class Team and MatchImpl." />
     <MESSAGE value="Added Team and Match class implementation as data classes." />
     <MESSAGE value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Scoreboard implementation along with unit test cases, updated MatchImpl and App classes accordingly." />
+    <MESSAGE value="refactor: removed unused test file and upgraded junit jupiter version." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: removed unused test file and upgraded junit jupiter version." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sportradar_live_odds_services$MatchImplTest.ic" NAME="MatchImplTest Coverage Results" MODIFIED="1747768717025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.sportradar.library.match.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/sportradar_live_odds_services$ScoreBoardImplTest.ic" NAME="ScoreBoardImplTest Coverage Results" MODIFIED="1747775259955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/sportradar_live_odds_services$ScoreBoardImplTest.ic" NAME="ScoreBoardImplTest Coverage Results" MODIFIED="1747779994277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.sportradar.library.scoreboard.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/sportradar_live_odds_services$TeamTest.ic" NAME="TeamTest Coverage Results" MODIFIED="1747768884758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

@@ -5,7 +5,6 @@ import com.sportradar.library.team.Team;
 import java.time.LocalDateTime;
 
 public interface Match {
-    int getTotalScore();
 
     Team getHomeTeam();
 

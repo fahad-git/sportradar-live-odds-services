@@ -22,11 +22,6 @@ public class MatchImpl implements Match {
         this.startTime = LocalDateTime.now();
     }
 
-    @Override
-    public int getTotalScore() {
-        return homeTeam.getScore() + awayTeam.getScore();
-    }
-
     public void updateScore(int homeScore, int awayScore) {
         homeTeam.setScore(homeScore);
         awayTeam.setScore(awayScore);

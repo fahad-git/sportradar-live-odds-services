@@ -5,6 +5,7 @@ import com.sportradar.library.exceptions.MatchNotFoundException;
 import com.sportradar.library.exceptions.TeamNameException;
 import com.sportradar.library.match.Match;
 import com.sportradar.library.match.MatchImpl;
+import com.sportradar.library.match.MatchSummary;
 import com.sportradar.library.team.Team;
 import lombok.Synchronized;
 
@@ -21,7 +22,7 @@ public class ScoreBoardImpl implements Scoreboard {
         validateTeamNames(homeTeamName, awayTeamName);
 
         // Check if this match already exists
-        if(findMatch(homeTeamName, awayTeamName).isPresent()) {
+        if (findMatch(homeTeamName, awayTeamName).isPresent()) {
             throw new DuplicateMatchException(
                     "It is not possible to have two same matches at the same time."
             );
@@ -35,6 +36,9 @@ public class ScoreBoardImpl implements Scoreboard {
     @Synchronized
     @Override
     public void finishMatch(String homeTeamName, String awayTeamName) {
+
+        validateTeamNames(homeTeamName, awayTeamName);
+
         // Remove match by team names
         boolean removed = matches.removeIf(match ->
                 match.getHomeTeam().getName().equalsIgnoreCase(homeTeamName) &&
@@ -64,39 +68,43 @@ public class ScoreBoardImpl implements Scoreboard {
         foundMatch.updateScore(homeTeamScore, awayTeamScore);
     }
 
-    @Synchronized
     @Override
-    public List<Match> getOrderedMatches() {
-        // Return unmodifiable sorted list:
-        // - First by total score descending
-        // - Then by start time descending (i.e., more recent first)
-        return Collections.unmodifiableList(
-                matches.stream()
-                        .sorted(Comparator.comparing(Match::getTotalScore)
-                                .thenComparing(Match::getStartTime)
-                                .reversed())
-                        .toList()
-        );
+    public List<MatchSummary> getOrderedMatches() {
+        return matches.stream()
+                .sorted(Comparator.comparing(this::getTotalScore, Comparator.reverseOrder())
+                        .thenComparing(Match::getStartTime, Comparator.reverseOrder()))
+                .map(match -> new MatchSummary(
+                        match.getHomeTeam().getName(),
+                        match.getHomeTeam().getScore(),
+                        match.getAwayTeam().getName(),
+                        match.getAwayTeam().getScore()))
+                .toList();
     }
 
-    // Utility method to find a match by team names
-    private Optional<Match> findMatch(String homeTeamName, String awayTeamName){
+
+    private Optional<Match> findMatch(String homeTeamName, String awayTeamName) {
+        // Utility method to find a match by team names
         return matches.stream()
                 .filter(m -> m.getHomeTeam().getName().equalsIgnoreCase(homeTeamName))
                 .filter(m -> m.getAwayTeam().getName().equalsIgnoreCase(awayTeamName))
                 .findFirst();
     }
 
-    // Validates that scores are not negative
+    private int getTotalScore(Match match) {
+        // Calculates total score of a given match
+        return match.getHomeTeam().getScore() + match.getAwayTeam().getScore();
+    }
+
     private void validateTeamScores(int homeTeamScore, int awayTeamScore) {
-        if(homeTeamScore < 0 || awayTeamScore < 0 ) {
+        // Validates that scores are not negative
+        if (homeTeamScore < 0 || awayTeamScore < 0) {
             throw new IllegalArgumentException(
                     "It is not possible to update match with negative values.");
         }
     }
 
-    // Validates team names are non-null, non-blank, and not the same
     private void validateTeamNames(String homeTeam, String awayTeam) {
+        // Validates team names are non-null, non-blank, and not the same
         if (homeTeam == null || awayTeam == null || homeTeam.isBlank() || awayTeam.isBlank()) {
             throw new TeamNameException("Team name cannot be empty.");
         }
@@ -104,4 +112,5 @@ public class ScoreBoardImpl implements Scoreboard {
             throw new TeamNameException("Teams cannot have the same name.");
         }
     }
+
 }
