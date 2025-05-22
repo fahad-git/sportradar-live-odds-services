@@ -29,10 +29,10 @@ public class App {
         scoreBoard.startMatch("Germany", "Italy");
         scoreBoard.finishMatch("Germany", "Italy");
 
-        List<MatchSummary> matchesSummary = scoreBoard.getOrderedMatches();
+        List<MatchSummary> matchSummaries = scoreBoard.getOrderedMatches();
 
         System.out.println("\nMatches in progress:");
-        for (MatchSummary summary : matchesSummary) {
+        for (MatchSummary summary : matchSummaries) {
             String line = String.format(
                     "%s %2d - %s %2d",
                     summary.homeTeamName(),

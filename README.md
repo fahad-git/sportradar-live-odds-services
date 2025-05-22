@@ -11,8 +11,8 @@ This project is a **Live Football World Cup Scoreboard Library** that helps mana
 - **Update Score**: Update the score for any ongoing match.
 - **Finish Match**: Mark a match as finished and remove it from the scoreboard.
 - **Match Summary**: Retrieve an ordered list of ongoing matches sorted by:
-  - Total score (descending)
-  - Start time (most recent first)
+    - Total score (descending)
+    - Start time (most recent first)
 
 ---
 
@@ -32,9 +32,9 @@ Scoreboard scoreboard = new ScoreBoardImpl();
 scoreboard.startMatch("Spain", "Brazil");
 ```
 
-  Automatically starts the match with a score of 0-0.
+Automatically starts the match with a score of 0-0.
 
-  Throws:
+Throws:
 - `TeamNameException` if the team names are blank, null, or identical.
 - `DuplicateMatchException` if the match already exists.
 
@@ -46,7 +46,7 @@ scoreboard.startMatch("Spain", "Brazil");
 scoreboard.updateScore("Spain", "Brazil", 2, 3);
 ```
 
-  Throws:
+Throws:
 - `MatchNotFoundException` if match is not found.
 - `InvalidScoreException` if any score is negative.
 
@@ -58,7 +58,7 @@ scoreboard.updateScore("Spain", "Brazil", 2, 3);
 scoreboard.finishMatch("Spain", "Brazil");
 ```
 
-  Throws:
+Throws:
 - `MatchNotFoundException` if the match does not exist.
 
 ---
@@ -66,15 +66,19 @@ scoreboard.finishMatch("Spain", "Brazil");
 ### Get Summary of Ongoing Matches
 
 ```java
-List<Match> summary = scoreboard.getOrderedMatches();
-for (Match match : summary) {
-    System.out.printf("%s %d - %s %d%n",
-        match.getHomeTeam().getName(),
-        match.getHomeTeam().getScore(),
-        match.getAwayTeam().getName(),
-        match.getAwayTeam().getScore()
+List<MatchSummary> matchSummaries = scoreBoard.getOrderedMatches();
+
+for (MatchSummary summary : matchSummaries) {
+    String line = String.format(
+    "%s %2d - %s %2d",
+    summary.homeTeamName(),
+    summary.homeTeamScore(),
+    summary.awayTeamName(),
+    summary.awayTeamScore()
     );
+    System.out.println(line);
 }
+
 ```
 
 🔁 Sorted by:
@@ -87,8 +91,8 @@ for (Match match : summary) {
 
 - Team names are **case-insensitive**.
 - A match cannot be started with:
-  - The same team on both sides
-  - Empty or blank team names
+    - The same team on both sides
+    - Empty or blank team names
 - You cannot start **duplicate matches**.
 - Scores must be **non-negative integers**.
 - Finished matches are removed from the scoreboard.
